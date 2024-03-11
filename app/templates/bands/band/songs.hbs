@@ -1,0 +1,17 @@
+{{page-title "Songs | Rock & Roll with Octane" replace=true}}
+
+{{#if @model.length}}
+  <ul>
+    {{#each @model as |song|}}
+      <li class="mb-2">
+        {{song.title}}
+        <span class="float-right">{{song.rating}}</span>
+      </li>
+    {{/each}}
+  </ul>
+
+{{else}}
+  <p class="text-center">
+    The band has no songs yet.
+  </p>
+{{/if}}
