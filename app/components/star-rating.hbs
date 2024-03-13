@@ -1,0 +1,10 @@
+{{#if (has-block)}}
+  {{yield this.stars}}
+{{else}}
+  {{#each this.stars as |star|}}
+    <button type="button" {{on "click" (fn @onUpdate star.rating)}}>
+      <FaIcon @icon="star" @prefix={{if star.full "fas" "far"}} />
+    </button>
+
+  {{/each}}
+{{/if}}
