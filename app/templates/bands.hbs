@@ -1,11 +1,5 @@
 {{page-title "Bands"}}
 
-{{!-- <ul>
-  {{#each @model as |band|}}
-    <li>{{band.name}}</li>
-  {{/each}}
-</ul> --}}
-
 <div class="w-1/3 px-2">
   <ul class="pl-2 pr-8">
     {{#each @model as |band|}}
@@ -16,6 +10,12 @@
       </li>
     {{/each}}
   </ul>
+  <LinkTo
+    @route="bands.new"
+    class="inline-block ml-2 mt-2 p-2 rounded bg-purple-600 shadow-md hover:shadow-lg hover:text-white hover:bg-purple-500 focus:outline-none"
+  >
+    Add band
+  </LinkTo>
 </div>
 
 <div class="w-2/3 px-2">

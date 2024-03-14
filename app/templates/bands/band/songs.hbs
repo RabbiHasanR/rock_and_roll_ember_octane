@@ -1,12 +1,14 @@
-{{page-title "Songs | Rock & Roll with Octane" replace=true}}
+{{page-title @model.name "Songs | Rock & Roll with Octane" replace=true}}
 
-{{#if @model.length}}
+{{!-- {{#if @model.length}} --}}
+{{#if @model.songs.length}}
   <ul>
-    {{#each @model as |song|}}
+    {{!-- {{#each @model as |song|}} --}}
+    {{#each @model.songs as |song|}}
       <li class="mb-2">
         {{song.title}}
         <span class="float-right">
-          <StarRating @rating={{song.rating}} @onUpdate={{set song 'rating'}}/>
+          <StarRating @rating={{song.rating}} @onUpdate={{set song "rating"}} />
         </span>
       </li>
     {{/each}}
@@ -16,4 +18,38 @@
   <p class="text-center">
     The band has no songs yet.
   </p>
+{{/if}}
+
+{{#if this.showAddSong}}
+  <div class="flex justify-center mt-2">
+    <button
+      type="button"
+      class="px-4 py-2 rounded bg-purple-600 shadow-md hover:shadow-lg hover:text-white hover:bg-purple-500 focus:outline-none"
+      {{on "click" (set this "showAddSong" false)}}
+    >Add song</button>
+  </div>
+{{else}}
+  <div class="mt-6 flex">
+    <label for="title" class="sr-only"> Title</label>
+    <input
+      type="text"
+      id="title"
+      class="text-gray-800 bg-white rounded-md py-2 mx-4"
+      placeholder="Title"
+      value={{this.title}}
+      {{on "input" this.updateTitle}}
+    />
+    <button
+      type="button"
+      class="ml-4 px-4 py-2 rounded shadow-md hover:shadow-lg hover:text-white {{if this.hasNoTitle "bg-purple-500" "bg-purple-600"}}"
+      disabled={{this.hasNoTitle}}
+      {{on "click" this.saveSong}}
+    >Save</button>
+
+    <button
+      type="button"
+      class="ml-2 px-4 p-2 rounded bg-white border border-bg-purple-600 shadow-md text-purple-600 hover:shadow-lg"
+      {{on "click" this.cancel}}
+    >Cancel</button>
+  </div>
 {{/if}}

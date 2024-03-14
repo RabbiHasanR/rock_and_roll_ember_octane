@@ -1,9 +1,9 @@
 import Route from '@ember/routing/route';
 import { tracked } from '@glimmer/tracking';
 
-class Band {
+export class Band {
   @tracked name;
-
+  @tracked songs;
   constructor({ id, name, songs }) {
     this.id = id;
     this.name = name;
@@ -11,7 +11,7 @@ class Band {
   }
 }
 
-class Song {
+export class Song {
   constructor({ title, rating, band }) {
     this.title = title;
     this.rating = rating;
@@ -21,11 +21,6 @@ class Song {
 
 export default class BandsRoute extends Route {
   model() {
-    // return [
-    //   new Band('Led Zeppelin'),
-    //   new Band('Pearl Jam'),
-    //   new Band('Foo Fighters'),
-    // ];
     let blackDog = new Song({
       title: 'Black Dog',
       band: 'Led Zeppelin',

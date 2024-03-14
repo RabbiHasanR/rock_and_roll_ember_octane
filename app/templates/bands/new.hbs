@@ -1,0 +1,32 @@
+{{page-title "New"}}
+
+<h3 class="text-lg leading-6 font-medium text-gray-100">New band</h3>
+
+<div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6">
+  <div class="sm:col-span-4">
+    <label for="name" class="block text-sm font-medium leading-5">Name</label>
+    <div class="mt-1 relative rounded-md shadow-sm">
+      <input
+        id="name"
+        class="w-full text-gray-800 bg-white border rounded-md py-2 px-4"
+        type="text"
+        value={{this.name}}
+        {{on "input" this.updateName}}
+      />
+    </div>
+  </div>
+
+  <div class="sm:col-span-4">
+    <div class="pt-5">
+      <div class="flex justify-end">
+        <button
+          type="button"
+          class="px-4 py-2 rounded shadow-md hover:shadow-lg hover:text-white
+            {{if this.hasNoName 'bg-purple-500' 'bg-purple-600'}}"
+          disabled={{this.hasNoName}}
+          {{on "click" this.saveBand}}
+        >Save</button>
+      </div>
+    </div>
+  </div>
+</div>
