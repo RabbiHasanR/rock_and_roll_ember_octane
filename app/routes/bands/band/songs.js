@@ -1,15 +1,30 @@
 import Route from '@ember/routing/route';
+import { service } from '@ember/service';
+import Song from '../../../models/song';
+import fetch from 'fetch';
 
 export default class BandsBandSongsRoute extends Route {
-  // model() {
-  //   let band = this.modelFor('bands.band');
-  //   return band.songs;
-  // }
+  @service catalog;
 
-  // setupController(controller) {
-  //   super.setupController(...arguments)
-  //   controller.set('band', this.modelFor('bands.band'))
-  // }
+  async model() {
+    let band = this.modelFor('bands.band');
+    let url = band.relationships.songs;
+    let response = await fetch(url);
+    let json = await response.json();
+    let songs = [];
+    for (let item of json.data) {
+      let { id, attributes, relationships } = item;
+      let rels = {};
+      for (let relationshipName in relationships) {
+        rels[relationshipName] = relationships[relationshipName].links.related;
+      }
+      let song = new Song({ id, ...attributes }, rels);
+      songs.push(song);
+      this.catalog.add('song', song);
+    }
+    band.songs = songs;
+    return band;
+  }
 
   resetController(controller) {
     controller.title = '';
