@@ -8,7 +8,7 @@
       <li class="mb-2">
         {{song.title}}
         <span class="float-right">
-          <StarRating @rating={{song.rating}} @onUpdate={{set song "rating"}} />
+          <StarRating @rating={{song.rating}} @onUpdate={{fn this.updateRating song}} />
         </span>
       </li>
     {{/each}}
