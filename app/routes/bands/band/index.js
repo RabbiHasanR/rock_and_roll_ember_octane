@@ -1,13 +1,8 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 
-export default class BandsBandRoute extends Route {
-  @service catalog;
+export default class BandsBandIndexRoute extends Route {
   @service router;
-
-  model(params) {
-    return this.catalog.find('band', (band) => band.id === params.id);
-  }
 
   redirect(band) {
     if (band.description) {
