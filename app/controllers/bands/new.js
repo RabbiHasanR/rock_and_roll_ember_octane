@@ -17,7 +17,9 @@ export default class BandsNewController extends Controller {
   constructor() {
     super(...arguments);
     this.router.on('routeWillChange', (transition) => {
-      console.log('routeWillChange:', transition);
+      if (transition.isAborted) {
+        return;
+      }
       if (this.confirmedLeave) {
         return;
       }
