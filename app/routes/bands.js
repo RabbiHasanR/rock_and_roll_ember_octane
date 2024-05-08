@@ -5,6 +5,7 @@ export default class BandsRoute extends Route {
   @service catalog;
 
   async model() {
-    return this.catalog.fetchAll('bands');
+    let bands = this.catalog.fetchAll('bands');
+    return bands
   }
 }

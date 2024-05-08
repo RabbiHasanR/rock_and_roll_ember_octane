@@ -15,7 +15,7 @@
   </ul>
 
 {{else}}
-  <p class="text-center">
+  <p class="text-center" data-test-rr="no-songs-text">
     The band has no songs yet.
   </p>
 {{/if}}
@@ -37,6 +37,7 @@
       class="text-gray-800 bg-white rounded-md py-2 mx-4"
       placeholder="Title"
       value={{this.title}}
+      data-test-rr="new-song-title"
       {{on "input" this.updateTitle}}
     />
     <button

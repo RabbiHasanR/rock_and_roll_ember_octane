@@ -11,6 +11,7 @@
         class="w-full text-gray-800 bg-white border rounded-md py-2 px-4"
         type="text"
         value={{this.name}}
+        data-test-rr="new-band-name"
         {{on "input" this.updateName}}
       />
     </div>
@@ -24,6 +25,7 @@
           class="px-4 py-2 rounded shadow-md hover:shadow-lg hover:text-white
             {{if this.hasNoName 'bg-purple-500' 'bg-purple-600'}}"
           disabled={{this.hasNoName}}
+          data-test-rr="save-band-button"
           {{on "click" this.saveBand}}
         >Save</button>
       </div>
