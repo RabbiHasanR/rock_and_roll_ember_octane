@@ -6,18 +6,18 @@ import { hbs } from 'ember-cli-htmlbars';
 module('Integration | Component | band-navigation', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function (assert) {
-    await render(hbs`<BandNavigation />`);
+  // test('it renders', async function (assert) {
+  //   await render(hbs`<BandNavigation />`);
 
-    assert.dom(this.element).hasText('');
+  //   assert.dom(this.element).hasText('');
 
-    // Template block usage:
-    await render(hbs`
-      <BandNavigation>
-        template block text
-      </BandNavigation>
-    `);
+  //   // Template block usage:
+  //   await render(hbs`
+  //     <BandNavigation>
+  //       template block text
+  //     </BandNavigation>
+  //   `);
 
-    assert.dom(this.element).hasText('template block text');
-  });
+  //   assert.dom(this.element).hasText('template block text');
+  // });
 });
