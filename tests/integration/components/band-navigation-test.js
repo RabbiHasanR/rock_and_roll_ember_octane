@@ -7,7 +7,6 @@ module('Integration | Component | band-navigation', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-
     await render(hbs`<BandNavigation />`);
 
     assert.dom(this.element).hasText('');

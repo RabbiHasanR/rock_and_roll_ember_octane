@@ -7,7 +7,6 @@ module('Integration | Component | band-list', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-
     await render(hbs`<BandList />`);
 
     assert.dom(this.element).hasText('');

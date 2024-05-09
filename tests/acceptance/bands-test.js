@@ -1,8 +1,9 @@
 import { module, test } from 'qunit';
-import { click, fillIn, visit, waitFor } from '@ember/test-helpers';
+import { visit, waitFor } from '@ember/test-helpers';
 import { setupApplicationTest } from 'rarwe/tests/helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { getPageTitle } from 'ember-page-title/test-support';
+import { createBand, createSong } from '../helpers/custom-helpers';
 
 module('Acceptance | bands', function (hooks) {
   setupApplicationTest(hooks);
@@ -34,9 +35,7 @@ module('Acceptance | bands', function (hooks) {
     this.server.create('band', { name: 'Royal Blood' });
 
     await visit('/');
-    await click('[data-test-rr="new-band-button"]');
-    await fillIn('[data-test-rr="new-band-name"]', 'Caspian');
-    await click('[data-test-rr="save-band-button"]');
+    await createBand('Caspian');
     await waitFor('[data-test-rr="no-songs-text"]');
 
     assert
@@ -48,5 +47,26 @@ module('Acceptance | bands', function (hooks) {
     assert
       .dom('[data-test-rr="songs-nav-item"] > .active')
       .exists('The Songs tab is active');
+  });
+
+  test('Create a song', async function (assert) {
+    this.server.create('band', { name: 'Royal Blood' });
+
+    await visit('/');
+    await createBand('Caspian');
+    await waitFor('[data-test-rr="no-songs-text"]');
+    await createSong('Fuck Song');
+    await waitFor('[data-test-rr="new-song-button"]');
+
+    assert
+      .dom('[data-test-rr="songs-nav-item"] > .active')
+      .exists('The Songs tab is active');
+
+    assert
+      .dom('[data-test-rr="song-list-item"]')
+      .exists({ count: 1 }, 'A new song is rendered');
+    assert
+      .dom('[data-test-rr="song-list-item"]:last-child')
+      .hasText('Fuck Song', 'The new song is rendered as the last item');
   });
 });

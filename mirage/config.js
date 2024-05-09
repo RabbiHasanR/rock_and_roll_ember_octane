@@ -53,4 +53,5 @@ function routes() {
   });
 
   this.post('/bands');
+  this.post('/songs');
 }

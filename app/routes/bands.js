@@ -6,6 +6,6 @@ export default class BandsRoute extends Route {
 
   async model() {
     let bands = this.catalog.fetchAll('bands');
-    return bands
+    return bands;
   }
 }
