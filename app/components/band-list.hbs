@@ -7,7 +7,7 @@
         @model={{item.band.id}}
         data-test-rr="band-link"
       >
-        {{item.band.name}}
+        {{capitalize item.band.name}}
       </LinkTo>
     </li>
   {{/each}}

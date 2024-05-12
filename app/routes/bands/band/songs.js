@@ -9,13 +9,12 @@ export default class BandsBandSongsRoute extends Route {
       as: 's',
     },
     searchTerm: {
-      as: 'q'
-    }
+      as: 'q',
+    },
   };
 
   async model() {
     let band = this.modelFor('bands.band');
-    console.log('song band:', band);
     await this.catalog.fetchRelated(band, 'songs');
     return band;
   }
