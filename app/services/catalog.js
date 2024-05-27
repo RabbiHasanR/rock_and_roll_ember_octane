@@ -3,6 +3,7 @@ import Band from '../models/band';
 import Song from '../models/song';
 import { tracked } from 'tracked-built-ins';
 import { isArray } from '@ember/array';
+import { data } from 'autoprefixer';
 
 function extractRelationships(object) {
   let relationships = {};
@@ -15,16 +16,30 @@ function extractRelationships(object) {
 export default class CatalogService extends Service {
   storage = {};
 
+  @tracked bands;
+  @tracked isLoading = false;
+
   constructor() {
     super(...arguments);
     this.storage.bands = tracked([]);
     this.storage.songs = tracked([]);
   }
 
+  setBands(data) {
+    console.log('set bands:', data);
+    this.bands = data;
+  }
+
+  setIsLoading(data) {
+    console.log('set isLoading:', data);
+    this.isLoading = data;
+  }
+
   async fetchAll(type) {
     if (type === 'bands') {
       let response = await fetch('/bands');
       let json = await response.json();
+      console.log('fetch all jsOn:', json);
       this.loadAll(json);
       return this.bands;
     }
